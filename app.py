@@ -1,6 +1,7 @@
-from flask import Flask, jsonify
-from flask_restful import Resource, Api
+from flask import Flask
+from flask_restful import Api
 from flask_jwt import JWT
+from db import db
 
 from security import authenticate, identity
 from resources.user import UserRegister
@@ -23,14 +24,13 @@ jwt = JWT(app, authenticate, identity)
 
 
 
-api.add_resource(Locations, '/locations')
-api.add_resource(Location, '/location/<string:name>')
-api.add_resource(BookShell, '/bookshell/<string:name>')
-api.add_resource(Book, '/book/<string:title>')
+#api.add_resource(Locations, '/locations')
+#api.add_resource(Location, '/location/<string:name>')
+#api.add_resource(BookShell, '/bookshell/<string:name>')
+#api.add_resource(Book, '/book/<string:title>')
 api.add_resource(UserRegister, '/register')
 #nie jestem pewna co do endpointów
 
 if __name__ == '__main__':
-    from db import db
     db.init_app(app)
-    app.run(port=5000)
+    app.run(port=5000, debug=True)
