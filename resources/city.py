@@ -18,3 +18,7 @@ class City(Resource):
         except:
             return {"message": "An error occured creating the store"}, 500
 
+class CityList(Resource):
+    def get(self):
+        cities = CityModel.query.all()
+        return {'cities': [x.json() for x in cities]}
