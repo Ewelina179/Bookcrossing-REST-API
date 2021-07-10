@@ -11,7 +11,7 @@ class CityModel(db.Model):
         self.name = name
 
     def json(self):
-        return {'name': self.name, 'items': [shell.json() for shell in self.shell.all()]}
+        return {'name': self.name, 'shells': [shell.json() for shell in self.shell.all()]}
 
     @classmethod
     def find_by_name(cls, name):

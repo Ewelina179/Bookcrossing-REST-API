@@ -7,7 +7,7 @@ from db import db
 
 from security import authenticate, identity
 from resources.user import UserRegister
-from resources.city import City
+from resources.city import City, CityList
 
 app = Flask(__name__)
 
@@ -29,7 +29,7 @@ jwt = JWT(app, authenticate, identity)
 
 
 
-#api.add_resource(Locations, '/locations')
+api.add_resource(CityList, '/cities')
 api.add_resource(City, '/city/<string:name>')
 #api.add_resource(BookShell, '/bookshell/<string:name>')
 #api.add_resource(Book, '/book/<string:title>')
