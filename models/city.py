@@ -5,17 +5,23 @@ class CityModel(db.Model):
 
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(64))
-    shell = db.relationship("ShellModel", lazy='dynamic')
+    shelf = db.relationship("ShelfModel", lazy='dynamic')
 
     def __init__(self, name):
         self.name = name
 
     def json(self):
-        return {'name': self.name, 'shells': [shell.json() for shell in self.shell.all()]}
+        return {'name': self.name, 'shelfs': [shelf.json() for shelf in self.shelf.all()]}
 
     @classmethod
     def find_by_name(cls, name):
         return cls.query.filter_by(name=name).first()
+
+    """
+    def find_all(self):
+        cities = CityModel.query.all()
+        return {'name' : [self.name for self.name in cities]}
+    """
 
     def save_to_db(self):
         db.session.add(self)

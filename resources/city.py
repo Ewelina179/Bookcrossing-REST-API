@@ -22,3 +22,4 @@ class CityList(Resource):
     def get(self):
         cities = CityModel.query.all()
         return {'cities': [x.json() for x in cities]}
+    
