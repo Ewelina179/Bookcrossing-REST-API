@@ -21,6 +21,14 @@ class Shelf(Resource):
         try:
             shelf.save_to_db()
         except:
-            return {'message': 'An error ocuured creating a shell'}, 500
+            return {'message': 'An error ocurred creating a shell'}, 500
+        return shelf.json(), 201
+
+    def post(self, name):
+        shelf = ShelfModel.find_by_name(name)
+        if shelf:
+            shelf.delete_from_db()
+
+        return {'message': 'Shelf deleted'}
 
 #class ShellList chyba zbędna. bo mam wszystko w klasie wyżej - city 
