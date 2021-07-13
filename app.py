@@ -9,6 +9,7 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.city import City, CityList
 from resources.shelf import Shelf
+from resources.book import Book, Booklist
 
 app = Flask(__name__)
 
@@ -35,7 +36,7 @@ api.add_resource(City, '/city/<string:name>')
 api.add_resource(Shelf, '/shelf/<string:name>')
 api.add_resource(Book, '/book/<string:title>')
 api.add_resource(UserRegister, '/register')
-#nie jestem pewna co do endpointów
+#nie jestem pewna co do endpointów + BookList po lokalizacji? czy raczej w shelf???
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
