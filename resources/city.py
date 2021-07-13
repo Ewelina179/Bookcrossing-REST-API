@@ -18,6 +18,14 @@ class City(Resource):
         except:
             return {"message": "An error occured creating the store"}, 500
 
+        return city.json(), 201
+
+    def delete(self, name):
+        city = CityModel.find_by_name(name)
+        if city:
+            city.delete_from_db()
+        return {'message': 'City deleted'}
+
 class CityList(Resource):
     def get(self):
         cities = CityModel.query.all()
