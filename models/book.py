@@ -20,4 +20,19 @@ class BookModel(db.Model):
         self.publishing_house = publishing_house
         self.publication_date = publication_date
 
-    #dodać metody konieczne
+    def json(self):
+        return {'title': self.title, 'author': self.author, 'shelf': self.shelf_id, 'is available': self.is_on_shelf, 'publishing house': self.publishing_house, 'publication date': self.publishing_date}
+
+    @classmethod
+    def find_by_title(cls, title):
+        cls.find_by_title(title=title).all()
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
+
+
