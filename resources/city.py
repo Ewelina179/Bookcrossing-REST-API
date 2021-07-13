@@ -1,4 +1,4 @@
-from flask_restful import Resource, reqparse
+from flask_restful import Resource
 from models.city import CityModel
 
 class City(Resource):

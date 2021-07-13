@@ -33,7 +33,7 @@ jwt = JWT(app, authenticate, identity)
 api.add_resource(CityList, '/cities')
 api.add_resource(City, '/city/<string:name>')
 api.add_resource(Shelf, '/shelf/<string:name>')
-#api.add_resource(Book, '/book/<string:title>')
+api.add_resource(Book, '/book/<string:title>')
 api.add_resource(UserRegister, '/register')
 #nie jestem pewna co do endpointów
 
