@@ -1,15 +1,15 @@
 from db import db
 
 class ShelfModel(db.Model):
-    
-    __tablename_ = 'shelfs'
+    __tablename__ = "shelfs"
+
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128))
     address = db.Column(db.String(128))
     city_id = db.Column(db.Integer, db.ForeignKey('cities.id'), nullable=False)
-    #book = db.relationship("BookModel", lazy='dynamic')
+    book = db.relationship("BookModel", lazy='dynamic')
+    city = db.relationship("CityModel")
 
-    #relacja z książką - czy backref dobrze napisane? nazwa tabeli czy klasa?
     def __init__(self, name, address, city_id):
         self.name = name
         self.address = address
