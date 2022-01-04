@@ -23,9 +23,6 @@ api = Api(app)
 db.init_app(app)
 migrate = Migrate(app, db)
 
-@app.before_first_request
-def create_tables():
-    db.create_all()
     
 jwt = JWT(app, authenticate, identity)
 
@@ -36,7 +33,7 @@ api.add_resource(City, '/city/<string:name>')
 api.add_resource(Shelf, '/shelf/<string:name>')
 api.add_resource(Book, '/book/<string:title>')
 api.add_resource(UserRegister, '/register')
-#nie jestem pewna co do endpointów + BookList po lokalizacji? czy raczej w shelf???
+
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
