@@ -8,14 +8,14 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.city import City, CityList
 from resources.shelf import Shelf
-from resources.book import Book, Booklist
+from resources.book import Book
 
 app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
-app.secret_key = "zmienic to. nie hardcoded ma być"
+app.secret_key = "s key"
 
 api = Api(app)
 
