@@ -4,7 +4,6 @@ from flask_jwt import JWT
 from flask_migrate import Migrate
 from db import db
 
-
 from security import authenticate, identity
 from resources.user import UserRegister
 from resources.city import City, CityList
