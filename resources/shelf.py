@@ -24,7 +24,7 @@ class Shelf(Resource):
             return {'message': 'An error ocurred creating a shell'}, 500
         return shelf.json(), 201
 
-    def post(self, name):
+    def delete(self, name):
         shelf = ShelfModel.find_by_name(name)
         if shelf:
             shelf.delete_from_db()
