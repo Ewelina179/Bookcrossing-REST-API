@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_restful import Api
 from flask_jwt import JWT
@@ -12,7 +14,7 @@ from resources.book import Book, BookList, BookShelfList
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['PROPAGATE_EXCEPTIONS'] = True
 app.secret_key = "s key"
@@ -24,7 +26,6 @@ migrate = Migrate(app, db)
 
     
 jwt = JWT(app, authenticate, identity)
-
 
 
 api.add_resource(CityList, '/cities')
