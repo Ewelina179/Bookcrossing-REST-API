@@ -11,6 +11,7 @@ Application based on code from the course REST APIs with Flask and Python (Tecla
 - pip install -r requirements.txt
 - flask db init
 - flask db migrate
+- flask db upgrade
 - flask run
 
 
