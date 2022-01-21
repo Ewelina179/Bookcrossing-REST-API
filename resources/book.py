@@ -28,6 +28,9 @@ class Book(Resource):
         publishing_house = data['publishing_house']
         publication_date = data['publication_date']
         shelf = ShelfModel.query.filter_by(id=shelf_id).first()
+
+        if not shelf:
+            return {'message': 'Shelf {} not exist.'.format(shelf_id)}, 400
         
         expiration_year  = int(publication_date[:4])
         expiration_month = int(publication_date[5:7])
@@ -35,6 +38,8 @@ class Book(Resource):
         expiration_date = datetime(expiration_year,expiration_month,expiration_date)
 
         book = BookModel(author=author, title=title, shelf_id=shelf.id, is_on_shelf=is_on_shelf, publishing_house=publishing_house, publication_date=expiration_date)
+
+
         
         try:
             book.save_to_db()
@@ -47,7 +52,10 @@ class Book(Resource):
         book = BookModel.find_by_title(title)
         if book:
             book.delete_from_db()
-        return {'message': 'Book deleted'}
+            return {'message': 'Book deleted'}
+        else:
+            return {'message': 'Book not in db'}
+
 
 class BookShelfList(Resource):
     def get(self, name):
