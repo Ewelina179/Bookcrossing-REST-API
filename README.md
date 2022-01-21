@@ -6,6 +6,13 @@ Application based on code from the course REST APIs with Flask and Python (Tecla
 
 ## Prerequisites
 
+git clone
+cd Bookcrossing_REST_API
+pip install -r requirements.txt
+flask db init
+flask db migrate
+flask run
+
 
 
 ## Usage
