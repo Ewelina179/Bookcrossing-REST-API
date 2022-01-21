@@ -21,32 +21,21 @@ class Book(Resource):
     def post(self, title):
         if BookModel.find_by_title(title):
             return {'message': 'Book {} already exist'.format(title)}, 400
-        print("hej")
         data = Book.parser.parse_args()
         author = data["author"]
         shelf_id = data["shelf_id"]
         is_on_shelf = data['is_on_shelf']
         publishing_house = data['publishing_house']
         publication_date = data['publication_date']
-        print("hejj")
-        print(shelf_id)
         shelf = ShelfModel.query.filter_by(id=shelf_id).first()
-        print(f"to {shelf.id} id tej półki")
         
         expiration_year  = int(publication_date[:4])
-        expiration_month =  int(publication_date[5:7])
+        expiration_month = int(publication_date[5:7])
         expiration_date = int(publication_date[8:10])
-        expiration_date =datetime(expiration_year,expiration_month,expiration_date)
+        expiration_date = datetime(expiration_year,expiration_month,expiration_date)
 
-        # najpierw sprawdź czy półka jest w bazie. jeśli nie, error, jeśli tak, wstaw jej id do obiektu book i to dalej
         book = BookModel(author=author, title=title, shelf_id=shelf.id, is_on_shelf=is_on_shelf, publishing_house=publishing_house, publication_date=expiration_date)
-        print(book.author)
-        print(book.title)
-        print(book.shelf_id)
-        print(book.is_on_shelf)
-        print(book.publishing_house)
-        print(book.publication_date)
-
+        
         try:
             book.save_to_db()
             print("hejo")
@@ -60,10 +49,17 @@ class Book(Resource):
             book.delete_from_db()
         return {'message': 'Book deleted'}
 
-    class BookList(Resource):
-        def get(self, shelf_id):
-            books=BookModel.query.filter_by(shelf_id=shelf_id).all()
-            return {'book from shell {}.format(shell_id)': [x.json() for x in books]}
+class BookShelfList(Resource):
+    def get(self, name):
+        shelf_id = ShelfModel.query.filter_by(name=name).first()
+        books=BookModel.query.filter_by(shelf_id=shelf_id.id).all()
+        return {'book from shelf': [x.json() for x in books]}
+
+class BookList(Resource):
+    def get(self):
+        books = BookModel.query.all()
+        return {'books': [x.json() for x in books]}
+
 
 
 

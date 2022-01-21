@@ -30,5 +30,3 @@ class Shelf(Resource):
             shelf.delete_from_db()
 
         return {'message': 'Shelf deleted'}
-
-#class ShellList chyba zbędna. bo mam wszystko w klasie wyżej - city 

@@ -8,7 +8,7 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.city import City, CityList
 from resources.shelf import Shelf
-from resources.book import Book
+from resources.book import Book, BookList, BookShelfList
 
 app = Flask(__name__)
 
@@ -28,6 +28,8 @@ jwt = JWT(app, authenticate, identity)
 
 
 api.add_resource(CityList, '/cities')
+api.add_resource(BookList, '/books')
+api.add_resource(BookShelfList, '/booksshelf/<string:name>')
 api.add_resource(City, '/city/<string:name>')
 api.add_resource(Shelf, '/shelf/<string:name>')
 api.add_resource(Book, '/book/<string:title>')
